@@ -16,7 +16,7 @@
 @end
 
 @implementation MGDetailViewController
-
+// 是否要隐藏状态栏
 -(BOOL)prefersStatusBarHidden{
     if (wmPlayer) {
         if (wmPlayer.isFullscreen) {
@@ -29,6 +29,9 @@
     }
 }
 
+/**
+ *  全屏显示
+ */
 - (void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation
 {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
@@ -58,8 +61,11 @@
     [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
     wmPlayer.fullScreenBtn.selected = YES;
     [wmPlayer bringSubviewToFront:wmPlayer.bottomView];
-    
 }
+
+/**
+ *  正常显示
+ */
 -(void)toNormal{
     [wmPlayer removeFromSuperview];
     [UIView animateWithDuration:0.5f animations:^{
@@ -84,9 +90,9 @@
         wmPlayer.isFullscreen = NO;
         [self setNeedsStatusBarAppearanceUpdate];
         wmPlayer.fullScreenBtn.selected = NO;
-        
     }];
 }
+
 -(void)fullScreenBtnClick:(NSNotification *)notice{
     UIButton *fullScreenBtn = (UIButton *)[notice object];
     if (fullScreenBtn.isSelected) {//全屏显示
