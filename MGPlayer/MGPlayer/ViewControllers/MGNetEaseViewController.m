@@ -59,146 +59,7 @@ static NSString *VideoCellIdentifier = @"VideoCell";
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_currentIndexPath.row inSection:0]];
     return currentCell;
 }
--(void)videoDidFinished:(NSNotification *)notice{
-    VideoCell *currentCell = [self currentCell];
-    [currentCell.playBtn.superview bringSubviewToFront:currentCell.playBtn];
-    [_wmPlayer removeFromSuperview];
-    [self setNeedsStatusBarAppearanceUpdate];
-    
-}
--(void)fullScreenBtnClick:(NSNotification *)notice{
-    
-}
-/**
- *  旋转屏幕通知
- */
-- (void)onDeviceOrientationChange{
-    
-    if (_wmPlayer==nil||_wmPlayer.superview==nil){
-        return;
-    }
-    
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)orientation;
-    switch (interfaceOrientation) {
-        case UIInterfaceOrientationPortraitUpsideDown:{
-            NSLog(@"第3个旋转方向---电池栏在下");
-        }
-            break;
-        case UIInterfaceOrientationPortrait:{
-            NSLog(@"第0个旋转方向---电池栏在上");
-            if (_wmPlayer.isFullscreen) {
-                [self toCell];
-            }
-        }
-            break;
-        case UIInterfaceOrientationLandscapeLeft:{
-            NSLog(@"第2个旋转方向---电池栏在左");
-            if (_wmPlayer.fullScreenBtn.selected == NO) {
-                _wmPlayer.isFullscreen = YES;
-                
-                [self setNeedsStatusBarAppearanceUpdate];
-                
-                [self toFullScreenWithInterfaceOrientation:interfaceOrientation];
-            }
-            
-        }
-            break;
-        case UIInterfaceOrientationLandscapeRight:{
-            NSLog(@"第1个旋转方向---电池栏在右");
-            if (_wmPlayer.fullScreenBtn.selected == NO) {
-                _wmPlayer.isFullscreen = YES;
-                
-                [self setNeedsStatusBarAppearanceUpdate];
-                
-                [self toFullScreenWithInterfaceOrientation:interfaceOrientation];
-            }
-            
-        }
-            break;
-        default:
-            break;
-    }
-}
 
--(void)toCell{
-    
-    VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_currentIndexPath.row inSection:0]];
-    
-    [_wmPlayer removeFromSuperview];
-    NSLog(@"row = %ld",_currentIndexPath.row);
-    [UIView animateWithDuration:0.5f animations:^{
-        _wmPlayer.transform = CGAffineTransformIdentity;
-        _wmPlayer.frame = currentCell.backgroundIV.bounds;
-        _wmPlayer.playerLayer.frame =  _wmPlayer.bounds;
-        [currentCell.backgroundIV addSubview:_wmPlayer];
-        [currentCell.backgroundIV bringSubviewToFront:_wmPlayer];
-        [_wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(_wmPlayer).with.offset(0);
-            make.right.equalTo(_wmPlayer).with.offset(0);
-            make.height.mas_equalTo(40);
-            make.bottom.equalTo(_wmPlayer).with.offset(0);
-            
-        }];
-        
-        [_wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(_wmPlayer).with.offset(5);
-            make.height.mas_equalTo(30);
-            make.width.mas_equalTo(30);
-            make.top.equalTo(_wmPlayer).with.offset(5);
-        }];
-        
-        
-    }completion:^(BOOL finished) {
-        _wmPlayer.isFullscreen = NO;
-        
-        [self setNeedsStatusBarAppearanceUpdate];
-        _wmPlayer.fullScreenBtn.selected = NO;
-        
-    }];
-    
-}
--(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
-    [_wmPlayer removeFromSuperview];
-    _wmPlayer.transform = CGAffineTransformIdentity;
-    if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
-        _wmPlayer.transform = CGAffineTransformMakeRotation(-M_PI_2);
-    }else if(interfaceOrientation==UIInterfaceOrientationLandscapeRight){
-        _wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
-    }
-    _wmPlayer.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-    _wmPlayer.playerLayer.frame =  CGRectMake(0,0, kScreenHeight,kScreenWidth);
-    
-    [_wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(40);
-        make.top.mas_equalTo(kScreenWidth-40);
-        make.width.mas_equalTo(kScreenHeight);
-    }];
-    
-    [_wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_wmPlayer).with.offset((-kScreenHeight/2));
-        make.height.mas_equalTo(30);
-        make.width.mas_equalTo(30);
-        make.top.equalTo(_wmPlayer).with.offset(5);
-        
-    }];
-    
-    
-    [[UIApplication sharedApplication].keyWindow addSubview:_wmPlayer];
-    _wmPlayer.isFullscreen = YES;
-    _wmPlayer.fullScreenBtn.selected = YES;
-    [_wmPlayer bringSubviewToFront:_wmPlayer.bottomView];
-    
-}
--(void)closeTheVideo:(NSNotification *)obj{
-    VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_currentIndexPath.row inSection:0]];
-    [currentCell.playBtn.superview bringSubviewToFront:currentCell.playBtn];
-    [self release_wmPlayer];
-    [self setNeedsStatusBarAppearanceUpdate];
-    
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 注册cell
@@ -207,7 +68,7 @@ static NSString *VideoCellIdentifier = @"VideoCell";
     
     //注册播放完成通知
     [MGNotificationCenter addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    //注册播放完成通知
+    //注册全屏播放完成通知
     [MGNotificationCenter addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
     //关闭通知
     [MGNotificationCenter addObserver:self selector:@selector(closeTheVideo:) name:WMPlayerClosedNotification object:nil];
@@ -217,7 +78,6 @@ static NSString *VideoCellIdentifier = @"VideoCell";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -225,6 +85,8 @@ static NSString *VideoCellIdentifier = @"VideoCell";
     [self performSelector:@selector(loadData) withObject:nil afterDelay:1.0];
     
 }
+
+// 加载数据
 -(void)loadData{
     [self addHudWithMessage:@"加载中..."];
     SidModel *sidModl = [AppDelegate shareAppDelegate].sidArray[1];
@@ -382,6 +244,158 @@ static NSString *VideoCellIdentifier = @"VideoCell";
             
         }
     }
+}
+
+#pragma mark - 通知
+-(void)videoDidFinished:(NSNotification *)notice{
+    VideoCell *currentCell = [self currentCell];
+    [currentCell.playBtn.superview bringSubviewToFront:currentCell.playBtn];
+    [_wmPlayer removeFromSuperview];
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+}
+-(void)fullScreenBtnClick:(NSNotification *)notice{
+    //    UIButton *fullScreenBtn = (UIButton *)[notice object];
+    //    if (fullScreenBtn.isSelected) {//全屏显示
+    //        _wmPlayer.isFullscreen = YES;
+    //        [self setNeedsStatusBarAppearanceUpdate];
+    //        [self toFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
+    //    }else{
+    //        [self toCell];
+    //    }
+}
+
+
+/**
+ *  旋转屏幕通知
+ */
+- (void)onDeviceOrientationChange{
+    
+    if (_wmPlayer==nil||_wmPlayer.superview==nil){
+        return;
+    }
+    
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)orientation;
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortraitUpsideDown:{
+            NSLog(@"第3个旋转方向---电池栏在下");
+        }
+            break;
+        case UIInterfaceOrientationPortrait:{
+            NSLog(@"第0个旋转方向---电池栏在上");
+            if (_wmPlayer.isFullscreen) {
+                [self toCell];
+            }
+        }
+            break;
+        case UIInterfaceOrientationLandscapeLeft:{
+            NSLog(@"第2个旋转方向---电池栏在左");
+            if (_wmPlayer.fullScreenBtn.selected == NO) {
+                _wmPlayer.isFullscreen = YES;
+                
+                [self setNeedsStatusBarAppearanceUpdate];
+                
+                [self toFullScreenWithInterfaceOrientation:interfaceOrientation];
+            }
+            
+        }
+            break;
+        case UIInterfaceOrientationLandscapeRight:{
+            NSLog(@"第1个旋转方向---电池栏在右");
+            if (_wmPlayer.fullScreenBtn.selected == NO) {
+                _wmPlayer.isFullscreen = YES;
+                
+                [self setNeedsStatusBarAppearanceUpdate];
+                
+                [self toFullScreenWithInterfaceOrientation:interfaceOrientation];
+            }
+            
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+-(void)toCell{
+    
+    VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_currentIndexPath.row inSection:0]];
+    
+    [_wmPlayer removeFromSuperview];
+    NSLog(@"row = %ld",_currentIndexPath.row);
+    [UIView animateWithDuration:0.5f animations:^{
+        _wmPlayer.transform = CGAffineTransformIdentity;
+        _wmPlayer.frame = currentCell.backgroundIV.bounds;
+        _wmPlayer.playerLayer.frame =  _wmPlayer.bounds;
+        [currentCell.backgroundIV addSubview:_wmPlayer];
+        [currentCell.backgroundIV bringSubviewToFront:_wmPlayer];
+        [_wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_wmPlayer).with.offset(0);
+            make.right.equalTo(_wmPlayer).with.offset(0);
+            make.height.mas_equalTo(40);
+            make.bottom.equalTo(_wmPlayer).with.offset(0);
+            
+        }];
+        
+        [_wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_wmPlayer).with.offset(5);
+            make.height.mas_equalTo(30);
+            make.width.mas_equalTo(30);
+            make.top.equalTo(_wmPlayer).with.offset(5);
+        }];
+        
+        
+    }completion:^(BOOL finished) {
+        _wmPlayer.isFullscreen = NO;
+        
+        [self setNeedsStatusBarAppearanceUpdate];
+        _wmPlayer.fullScreenBtn.selected = NO;
+        
+    }];
+    
+}
+
+-(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    [_wmPlayer removeFromSuperview];
+    _wmPlayer.transform = CGAffineTransformIdentity;
+    if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
+        _wmPlayer.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    }else if(interfaceOrientation==UIInterfaceOrientationLandscapeRight){
+        _wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
+    }
+    _wmPlayer.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    _wmPlayer.playerLayer.frame =  CGRectMake(0,0, kScreenHeight,kScreenWidth);
+    
+    [_wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(40);
+        make.top.mas_equalTo(kScreenWidth-40);
+        make.width.mas_equalTo(kScreenHeight);
+    }];
+    
+    [_wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(_wmPlayer).with.offset((-kScreenHeight/2));
+        make.height.mas_equalTo(30);
+        make.width.mas_equalTo(30);
+        make.top.equalTo(_wmPlayer).with.offset(5);
+        
+    }];
+    
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:_wmPlayer];
+    _wmPlayer.isFullscreen = YES;
+    _wmPlayer.fullScreenBtn.selected = YES;
+    [_wmPlayer bringSubviewToFront:_wmPlayer.bottomView];
+    
+}
+
+-(void)closeTheVideo:(NSNotification *)obj{
+    VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_currentIndexPath.row inSection:0]];
+    [currentCell.playBtn.superview bringSubviewToFront:currentCell.playBtn];
+    [self release_wmPlayer];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 /**

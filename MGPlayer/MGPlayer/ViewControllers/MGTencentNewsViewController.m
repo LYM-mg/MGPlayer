@@ -63,7 +63,7 @@ static NSString *VideoCellIdentifier = @"VideoCell";
     
     //注册播放完成通知
     [MGNotificationCenter addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    //注册播放完成通知
+    //注册全屏播放完成通知
     [MGNotificationCenter addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
     //关闭通知
     [MGNotificationCenter addObserver:self selector:@selector(closeTheVideo:) name:WMPlayerClosedNotification object:nil];
@@ -317,17 +317,31 @@ static NSString *VideoCellIdentifier = @"VideoCell";
     
 }
 
-
+// 视频播放完成
 -(void)videoDidFinished:(NSNotification *)notice{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndexPath.row inSection:0]];
     [currentCell.playBtn.superview bringSubviewToFront:currentCell.playBtn];
     [wmPlayer removeFromSuperview];
 }
 
+// 全屏显示
 -(void)fullScreenBtnClick:(NSNotification *)notice{
-    
+    UIButton *fullScreenBtn = (UIButton *)[notice object];
+    if (fullScreenBtn.isSelected) {//全屏显示
+        wmPlayer.isFullscreen = YES;
+        [self setNeedsStatusBarAppearanceUpdate];
+        [self toFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
+    }else{
+        if (_isSmallScreen) {
+            //放widow上,小屏显示
+            [self toSmallScreen];
+        }else{
+            [self toCell];
+        }
+    }
 }
 
+// 关闭视频
 -(void)closeTheVideo:(NSNotification *)obj{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndexPath.row inSection:0]];
     [currentCell.playBtn.superview bringSubviewToFront:currentCell.playBtn];
