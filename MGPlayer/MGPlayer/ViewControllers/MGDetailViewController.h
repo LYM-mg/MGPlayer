@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MGDetailViewController.h
 //  MGPlayer
 //
 //  Created by ming on 16/6/3.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
-
+@interface MGDetailViewController : UIViewController
+@property (nonatomic, retain)NSString * URLString;
 @end
-

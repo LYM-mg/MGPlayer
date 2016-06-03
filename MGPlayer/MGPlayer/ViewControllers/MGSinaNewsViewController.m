@@ -8,7 +8,7 @@
 
 #import "MGSinaNewsViewController.h"
 
-@interface MGSinaNewsViewController ()
+@interface MGSinaNewsViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 

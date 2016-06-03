@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A34A4991D01BF5A006F1AE4 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34A4971D01BF5A006F1AE4 /* VideoCell.m */; settings = {ASSET_TAGS = (); }; };
+		3A34A49A1D01BF5A006F1AE4 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A34A4981D01BF5A006F1AE4 /* VideoCell.xib */; settings = {ASSET_TAGS = (); }; };
+		3A34A49D1D01CD88006F1AE4 /* MGDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34A49C1D01CD88006F1AE4 /* MGDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3A5055141D01AD9800AE9558 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5055131D01AD9800AE9558 /* main.m */; };
 		3A5055171D01AD9800AE9558 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5055161D01AD9800AE9558 /* AppDelegate.m */; };
-		3A50551A1D01AD9800AE9558 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5055191D01AD9800AE9558 /* ViewController.m */; };
-		3A50551D1D01AD9800AE9558 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A50551B1D01AD9800AE9558 /* Main.storyboard */; };
 		3A5055201D01AD9800AE9558 /* MGPlayer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A50551E1D01AD9800AE9558 /* MGPlayer.xcdatamodeld */; };
 		3A5055221D01AD9800AE9558 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5055211D01AD9800AE9558 /* Assets.xcassets */; };
 		3A5055251D01AD9800AE9558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5055231D01AD9800AE9558 /* LaunchScreen.storyboard */; };
@@ -92,13 +93,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A34A4961D01BF5A006F1AE4 /* VideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
+		3A34A4971D01BF5A006F1AE4 /* VideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
+		3A34A4981D01BF5A006F1AE4 /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
+		3A34A49B1D01CD88006F1AE4 /* MGDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGDetailViewController.h; sourceTree = "<group>"; };
+		3A34A49C1D01CD88006F1AE4 /* MGDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDetailViewController.m; sourceTree = "<group>"; };
 		3A50550F1D01AD9800AE9558 /* MGPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MGPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5055131D01AD9800AE9558 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A5055151D01AD9800AE9558 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A5055161D01AD9800AE9558 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3A5055181D01AD9800AE9558 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3A5055191D01AD9800AE9558 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3A50551C1D01AD9800AE9558 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A50551F1D01AD9800AE9558 /* MGPlayer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MGPlayer.xcdatamodel; sourceTree = "<group>"; };
 		3A5055211D01AD9800AE9558 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A5055241D01AD9800AE9558 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -252,6 +255,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A34A4951D01BF4A006F1AE4 /* VideoCell */ = {
+			isa = PBXGroup;
+			children = (
+				3A34A4961D01BF5A006F1AE4 /* VideoCell.h */,
+				3A34A4971D01BF5A006F1AE4 /* VideoCell.m */,
+				3A34A4981D01BF5A006F1AE4 /* VideoCell.xib */,
+			);
+			path = VideoCell;
+			sourceTree = "<group>";
+		};
 		3A5055061D01AD9800AE9558 = {
 			isa = PBXGroup;
 			children = (
@@ -277,9 +290,6 @@
 				3A5055D51D01B3E700AE9558 /* WMPlayer */,
 				3A5055D41D01B2AD00AE9558 /* MGTabbarController */,
 				3A5055DE1D01B4E700AE9558 /* ViewControllers */,
-				3A5055181D01AD9800AE9558 /* ViewController.h */,
-				3A5055191D01AD9800AE9558 /* ViewController.m */,
-				3A50551B1D01AD9800AE9558 /* Main.storyboard */,
 				3A5055211D01AD9800AE9558 /* Assets.xcassets */,
 				3A5055231D01AD9800AE9558 /* LaunchScreen.storyboard */,
 				3A5055261D01AD9800AE9558 /* Info.plist */,
@@ -532,6 +542,9 @@
 				3A5056161D01B70200AE9558 /* MGSinaNewsViewController.h */,
 				3A5056171D01B70200AE9558 /* MGSinaNewsViewController.m */,
 				3A5056181D01B70200AE9558 /* MGSinaNewsViewController.xib */,
+				3A34A49B1D01CD88006F1AE4 /* MGDetailViewController.h */,
+				3A34A49C1D01CD88006F1AE4 /* MGDetailViewController.m */,
+				3A34A4951D01BF4A006F1AE4 /* VideoCell */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -631,13 +644,13 @@
 				3A5056071D01B62800AE9558 /* navigator_btn_back.png in Resources */,
 				3A5056031D01B61600AE9558 /* video_play_btn_bg@2x.png in Resources */,
 				3A5056011D01B61600AE9558 /* share_s@2x.png in Resources */,
+				3A34A49A1D01BF5A006F1AE4 /* VideoCell.xib in Resources */,
 				3A5055B11D01AFEF00AE9558 /* MJRefresh.bundle in Resources */,
 				3A5055FF1D01B61600AE9558 /* playcount.png in Resources */,
 				3A5055FA1D01B61600AE9558 /* found_s@2x.png in Resources */,
 				3A5055D91D01B3E700AE9558 /* WMPlayer.bundle in Resources */,
 				3A5056001D01B61600AE9558 /* share@2x.png in Resources */,
 				3A5056121D01B6BE00AE9558 /* MGNetEaseViewController.xib in Resources */,
-				3A50551D1D01AD9800AE9558 /* Main.storyboard in Resources */,
 				3A50561A1D01B70200AE9558 /* MGSinaNewsViewController.xib in Resources */,
 				3A5055F81D01B61600AE9558 /* close@2x.png in Resources */,
 				3A5055F91D01B61600AE9558 /* found@2x.png in Resources */,
@@ -658,7 +671,6 @@
 				3A5055B01D01AFEF00AE9558 /* MJRefreshStateHeader.m in Sources */,
 				3A5055AD1D01AFEF00AE9558 /* MJRefreshBackStateFooter.m in Sources */,
 				3A5056191D01B70200AE9558 /* MGSinaNewsViewController.m in Sources */,
-				3A50551A1D01AD9800AE9558 /* ViewController.m in Sources */,
 				3A5055171D01AD9800AE9558 /* AppDelegate.m in Sources */,
 				3A5055981D01AFEF00AE9558 /* MASConstraint.m in Sources */,
 				3A5055BE1D01AFEF00AE9558 /* UIButton+WebCache.m in Sources */,
@@ -691,7 +703,9 @@
 				3A5055A41D01AFEF00AE9558 /* MJRefreshBackFooter.m in Sources */,
 				3A5055A61D01AFEF00AE9558 /* MJRefreshFooter.m in Sources */,
 				3A5055141D01AD9800AE9558 /* main.m in Sources */,
+				3A34A49D1D01CD88006F1AE4 /* MGDetailViewController.m in Sources */,
 				3A5055C01D01AFEF00AE9558 /* UIImage+MultiFormat.m in Sources */,
+				3A34A4991D01BF5A006F1AE4 /* VideoCell.m in Sources */,
 				3A5055A71D01AFEF00AE9558 /* MJRefreshHeader.m in Sources */,
 				3A5055AC1D01AFEF00AE9558 /* MJRefreshBackNormalFooter.m in Sources */,
 				3A5055B61D01AFEF00AE9558 /* NSData+ImageContentType.m in Sources */,
@@ -714,14 +728,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3A50551B1D01AD9800AE9558 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A50551C1D01AD9800AE9558 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3A5055231D01AD9800AE9558 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -858,6 +864,7 @@
 				3A50552B1D01AD9800AE9558 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

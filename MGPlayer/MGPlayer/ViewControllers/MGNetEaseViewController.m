@@ -8,7 +8,7 @@
 
 #import "MGNetEaseViewController.h"
 
-@interface MGNetEaseViewController ()
+@interface MGNetEaseViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
