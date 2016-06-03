@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "39F270EEC7A933F731A9DEEDE2EA255BA939230E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "be73ea83-1ef3-4b60-8caa-c8a69a106ff0++9413" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "39F270EEC7A933F731A9DEEDE2EA255BA939230E" : 0,
+    "be73ea83-1ef3-4b60-8caa-c8a69a106ff0++9413" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "ADFF27F3-7949-426B-88D0-6D8BF1150E61",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "39F270EEC7A933F731A9DEEDE2EA255BA939230E" : "MGPlarer\/",
+    "be73ea83-1ef3-4b60-8caa-c8a69a106ff0++9413" : "MGPlarer\/MGPlayer\/MGPlayer\/ThirdLib\/SDWebImage\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MGPlayer",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MGPlayer\/MGPlayer.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/LYM-mg\/MGPlarer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "39F270EEC7A933F731A9DEEDE2EA255BA939230E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/www.svnchina.com\/svn\/finalversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "be73ea83-1ef3-4b60-8caa-c8a69a106ff0++9413"
+    }
+  ]
+}
